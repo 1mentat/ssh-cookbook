@@ -1,3 +1,9 @@
+# Defines ssh service name based on distro
+default[:ssh][:service_name] = case node["platform_family"]
+  when "debian","ubuntu" then "ssh"
+  else "sshd"
+end
+#
 # Port on which openssh listens on
 default[:ssh][:port] = "22"
 #
