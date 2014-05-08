@@ -1,4 +1,6 @@
-service node[:ssh][:service_name]
+service node[:ssh][:service_name] do
+  provider Chef::Provider::Service::Upstart if 'ubuntu' == node['platform'] && Chef::VersionConstraint.new('>= 12.04').include?(node['platform_version'])
+end
 
 ssh_config "Port" do
   string "Port #{node[:ssh][:port]}"
